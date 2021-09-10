@@ -30,7 +30,9 @@ public class TemplateProjectApplication {
 			List<Account> listOfAccounts = listOfClients.stream().flatMap(client-> client.getAccounts().stream()).collect(Collectors.toList());
 		    Optional<Account> maxLimitAccount =
 					listOfAccounts.stream().max((a,b)->(a.getValidityDate().isAfter(b.getValidityDate()) ? 1 : a.getValidityDate().isEqual(b.getValidityDate())? 0 : -1));
-			List<Account> filteredList = listOfAccounts.stream().filter(account->account.getValidityDate()==maxLimitAccount.get().getValidityDate()).collect(Collectors.toList());
+			List<Account> filteredList = listOfAccounts.stream().filter(account->account.getValidityDate().isEqual(maxLimitAccount.get().getValidityDate())).collect(Collectors.toList());
+
+			System.out.println(listOfAccounts);
 			System.out.println(filteredList);
 	}
 
